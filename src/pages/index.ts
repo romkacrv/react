@@ -1,4 +1,5 @@
-import Main from "./Main";
-import Users from "./Users";
+import Main from './Main';
+import Users from './Users';
+import User from './User';
 
-export { Main, Users };
+export { Main, Users, User };
