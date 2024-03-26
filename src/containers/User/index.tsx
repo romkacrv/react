@@ -1,9 +1,9 @@
-import React, { useCallback, useEffect, useState, ReactElement } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import React, { ReactElement } from 'react';
+import { Link } from 'react-router-dom';
 import { createUseStyles } from 'react-jss';
 
 import * as types from '../../types';
-import { fetchUser } from '../../api';
+import { useUser } from '../../hooks';
 
 import { Loader } from '../../components';
 
@@ -19,12 +19,15 @@ const useStyles = createUseStyles({
       'text-decoration': 'none',
     },
   },
+  error: {
+    marginTop: 16,
+    color: 'red',
+  },
 });
 
 const Details = ({ user }: { user: types.TUser }): ReactElement => {
   const classes = useStyles();
-
-  const { address = {}, name = {} } = user;
+  const { address, name } = user;
 
   return (
     <ul className={classes.list}>
@@ -43,21 +46,8 @@ const Details = ({ user }: { user: types.TUser }): ReactElement => {
 
 const User = () => {
   const classes = useStyles();
-  const [user, setUser] = useState<types.TUser>();
-  const [loading, setLoading] = useState(true);
-  const params = useParams();
 
-  const { id } = params;
-
-  const getUser = useCallback(async () => {
-    const data: Awaited<types.TUser> = await fetchUser(id);
-    setUser(data);
-    setLoading(false);
-  }, []);
-
-  useEffect(() => {
-    getUser();
-  }, [getUser]);
+  const { user, loading, error } = useUser();
 
   return (
     <div className={classes.container}>
@@ -65,7 +55,11 @@ const User = () => {
         <Link to="/users">&lsaquo;</Link> Details
       </h4>
       <Loader loading={loading}>
-        <Details user={user} />
+        {error ? (
+          <div className={classes.error}>{error}</div>
+        ) : (
+          <Details user={user} />
+        )}
       </Loader>
     </div>
   );

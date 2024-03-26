@@ -1,9 +1,9 @@
-import React, { useState, useCallback, useEffect, ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 import { Link } from 'react-router-dom';
 import { createUseStyles } from 'react-jss';
 
 import * as types from '../../types';
-import { fetchUsers } from '../../api';
+import { useUsers } from '../../hooks';
 
 import { Loader } from '../../components';
 
@@ -18,6 +18,10 @@ const useStyles = createUseStyles({
     '& a': {
       'text-decoration': 'none',
     },
+  },
+  error: {
+    marginTop: 16,
+    color: 'red',
   },
 });
 
@@ -35,21 +39,9 @@ const List = ({ users }: { users: types.TUsers }): ReactElement => {
   );
 };
 
-const Users = () => {
+const Users = (): ReactElement => {
   const classes = useStyles();
-  const [users, setUsers] = useState<types.TUsers>();
-  const [loading, setLoading] = useState(true);
-
-  const getUsers = useCallback(async () => {
-    const data: Awaited<types.TUsers> = await fetchUsers();
-    setLoading(false);
-    setUsers(data);
-    setLoading(false);
-  }, []);
-
-  useEffect(() => {
-    getUsers();
-  }, [getUsers]);
+  const { users, loading, error } = useUsers();
 
   return (
     <div className={classes.container}>
@@ -57,7 +49,11 @@ const Users = () => {
         <Link to="/">&lsaquo;</Link> Users
       </h4>
       <Loader loading={loading}>
-        <List users={users} />
+        {error ? (
+          <div className={classes.error}>{error}</div>
+        ) : (
+          <List users={users} />
+        )}
       </Loader>
     </div>
   );
