@@ -1,27 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
-import type { PayloadAction } from '@reduxjs/toolkit';
+// import type { PayloadAction } from '@reduxjs/toolkit';
 
-export interface TusersState {
-  value: number;
-}
+import * as types from '../../types';
 
-const initialState: TusersState = {
-  value: 0,
-};
+const initialState: types.TUsers = [];
 
 export const usersSlice = createSlice({
-  name: 'counter',
+  name: 'users',
   initialState,
   reducers: {
-    increment: (state) => {
-      state.value += 1;
-    },
-    decrement: (state) => {
-      state.value -= 1;
-    },
-    incrementByAmount: (state, action: PayloadAction<number>) => {
-      state.value += action.payload;
-    },
+    get: (state) => state,
   },
 });
 
