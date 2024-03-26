@@ -43,7 +43,7 @@ const Details = ({ user }: { user: types.TUser }): ReactElement => {
 
 const User = () => {
   const classes = useStyles();
-  const [user, setUser] = useState<types.TUser | null>(null);
+  const [user, setUser] = useState<types.TUser>();
   const [loading, setLoading] = useState(true);
   const params = useParams();
 

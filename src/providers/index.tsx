@@ -17,14 +17,16 @@ export const ModalProvider = ({ children }: { children: ReactElement }) => {
     onClose: modal?.props?.onClose ? modal.props.onClose : close,
   };
 
+  const isOpen = !!modal;
+
   return (
     <context.ModalContext.Provider
       value={{
         open,
         close,
-        isOpen: !!modal,
+        isOpen,
       }}>
-      {modal && React.cloneElement(modal, modalProps)}
+      {isOpen && React.cloneElement(modal, modalProps)}
       {children}
     </context.ModalContext.Provider>
   );
