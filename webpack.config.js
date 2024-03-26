@@ -72,6 +72,9 @@ module.exports = function (_env, argv) {
     },
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      alias: {
+        '@assests': path.resolve(__dirname, 'src/assets/'),
+      },
     },
     plugins: [
       isProduction &&

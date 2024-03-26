@@ -14,8 +14,8 @@
     "resolveJsonModule": true,
     "paths": {
       "*": ["node_modules/*"],
-      "@assets/*": ["./assets/*"],
-      "@src/*": ["src/*"]
+      "@src/*": ["src/*"],
+      "@assets/*": ["./src/assets/*"]
     }
   },
   "include": ["src/**/*", "babel.config.js"]

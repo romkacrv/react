@@ -1,6 +1,6 @@
 import * as types from '../types';
 
-export const fetchUsers = async (): Promise<[types.TUser]> => {
+export const fetchUsers = async (): Promise<types.TUsers> => {
   return await fetch('https://fakestoreapi.com/users').then((res) =>
     res.json()
   );

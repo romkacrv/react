@@ -21,17 +21,17 @@
       "alias": {
         "map": [
           ["@src", "./src"],
-          ["@assets", "./assets"]
+          ["@assets", ".src/assets"]
         ],
         "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
     },
     "react": {
-      "version": "latest"
+      "version": "detect"
     }
   },
   "rules": {
     "react/prop-types": "off",
-    "@typescript-eslint/no-var-requires": "off"
+    "typescript-eslint/no-var-requires": "off"
   }
 }

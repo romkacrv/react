@@ -6,3 +6,5 @@ export type TUser = {
   address: Record<string, string>;
   username: string;
 };
+
+export type TUsers = TUser[];

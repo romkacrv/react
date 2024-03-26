@@ -21,7 +21,7 @@ const useStyles = createUseStyles({
   },
 });
 
-const List = ({ users }: { users: [types.TUser] }): ReactElement => {
+const List = ({ users }: { users: types.TUsers }): ReactElement => {
   const classes = useStyles();
 
   return (
@@ -37,11 +37,12 @@ const List = ({ users }: { users: [types.TUser] }): ReactElement => {
 
 const Users = () => {
   const classes = useStyles();
-  const [users, setUsers] = useState<[types.TUser]>();
+  const [users, setUsers] = useState<types.TUsers>();
   const [loading, setLoading] = useState(true);
 
   const getUsers = useCallback(async () => {
-    const data: Awaited<[types.TUser]> = await fetchUsers();
+    const data: Awaited<types.TUsers> = await fetchUsers();
+    setLoading(false);
     setUsers(data);
     setLoading(false);
   }, []);
